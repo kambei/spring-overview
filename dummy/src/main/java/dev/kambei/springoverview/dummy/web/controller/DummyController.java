@@ -1,4 +1,4 @@
-package dev.kambei.springoverview.web.controller;
+package dev.kambei.springoverview.dummy.web.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/dummy")
+@RequestMapping("")
 public class DummyController {
     
     @GetMapping("/hello")

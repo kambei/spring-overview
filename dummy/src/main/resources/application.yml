@@ -1,0 +1,12 @@
+spring.application.name: dummy-service
+server.port: 9001
+
+spring.cloud.discovery.enabled: false
+
+# ACTUATORS
+management.endpoints.jmx.exposure.exclude:
+management.endpoints.jmx.exposure.include: info,health,env,loggers
+management.endpoints.web.exposure.exclude:
+management.endpoints.web.exposure.include: info,health,env,loggers
+management.endpoint.info.enabled: true
+management.endpoint.loggers.enabled: true

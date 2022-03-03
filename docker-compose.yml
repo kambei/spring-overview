@@ -1,27 +1,35 @@
 version: "3.9"
 services:
 
-  discovery-service:
-    image: spring-overwiew/discovery-server
+  discovery-server:
+    image: spring-overview/discovery-server
     build:
       context: discovery-server
+    env_file:
+      - .env
     ports:
-      - ${DISCOVERY_SERVICE_EXTERNAL_PORT:-18761}:8761
+      - ${DISCOVERY_SERVER_EXTERNAL_PORT:-18761}:8761
 
   api-gateway:
-    image: spring-overwiew/api-gateway
+    image: spring-overview/api-gateway
     build:
       context: api-gateway
+    env_file:
+      - .env
     ports:
       - ${API_GATEWAY_EXTERNAL_PORT:-18765}:8765
     depends_on:
-      discovery-service:
+      discovery-server:
         condition: service_healthy
 
   dummy-service:
-    image: spring-overwiew/dummy-service
+    image: spring-overview/dummy-service
     build:
       context: dummy
+    env_file:
+      - .env
+    environment:
+      - SERVICE_PROFILES
     depends_on:
-      discovery-service:
+      discovery-server:
         condition: service_healthy
