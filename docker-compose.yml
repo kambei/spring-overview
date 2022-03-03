@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+
+  discovery-service:
+    image: spring-overwiew/discovery-server
+    build:
+      context: discovery-server
+    ports:
+      - ${DISCOVERY_SERVICE_EXTERNAL_PORT:-18761}:8761
+
+  api-gateway:
+    image: spring-overwiew/api-gateway
+    build:
+      context: api-gateway
+    ports:
+      - ${API_GATEWAY_EXTERNAL_PORT:-18765}:8765
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+
+  dummy-service:
+    image: spring-overwiew/dummy-service
+    build:
+      context: dummy
+    depends_on:
+      discovery-service:
+        condition: service_healthy
